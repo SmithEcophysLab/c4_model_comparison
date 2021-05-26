@@ -8,7 +8,7 @@ the goals of the working group.
 
 ## file directory
 
-### (/c4_model_code)[c4_model_code]
+### [/c4_model_code](c4_model_code)
 This folder contains all the code to run the C4 photosynthesis model 
 using user specified options.
 Included is the (R script defining the primary model function
