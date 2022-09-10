@@ -57,7 +57,29 @@ calc_c4_photosynthesis = function(func = 'collatz',
                       ac, aj, ap,
                       a))
     
-  } else{
+  } 
+  
+  else if(func == 'von caemmerer') {
+    
+    vcmax = calc_vcmax_tresp(tleaf = tleaf, tref = tref_vcmax, vcmax_ref = vcmax_ref, func = func_vcmax_tresp)
+    vpmax = calc_vpmax_tresp(tleaf = tleaf, tref = tref_vpmax, vpmax_ref = vpmax_ref, func = func_vpmax_tresp)
+    ci = ci_calc(ca = ca, ca_frac = ca_frac, func = func_ci)
+    
+    ac = vcmax
+    aj = q_yield * abs * par
+    ap = vpmax * ci
+    
+    a = pmin(ac, aj, ap)
+    
+    return(data.frame(tleaf, ca, par,
+                      q_yield, abs,
+                      vcmax, vpmax, ci, 
+                      ac, aj, ap,
+                      a))
+    
+  }
+  
+  else{
     
     return('invalid photosynthesis function specified')
     
