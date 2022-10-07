@@ -14,6 +14,7 @@
 # par: photosynthetically active radiation at leaf surface (µmol m-2 s-1)
 # q_yield: quantum yield (mol mol-1)
 # abs: absoptance (unitless)
+# z: elevation (m.a.s.l.)
 # ci_frac: ratio of intercellular to atmospheric co2 (unitless)
 # func: ci response function to use, options:
   # 1. 'ca_frac': ci is calculated as a fraction of ca
@@ -35,6 +36,7 @@ sourceDirectory('functions')
 calc_c4_photosynthesis = function(func = 'collatz',
                                   tleaf = 25, ca = 400, par = 500,
                                   q_yield = 0.066, abs = 0.8,
+                                  z = 0,
                                   ca_frac = 0.8, func_ci = 'ca_frac',
                                   tref_vcmax = 25, vcmax_ref = 39, func_vcmax_tresp = 'collatz',
                                   tref_vpmax = 25, vpmax_ref = 0.78, func_vpmax_tresp = 'collatz'){
@@ -64,10 +66,17 @@ calc_c4_photosynthesis = function(func = 'collatz',
     vcmax = calc_vcmax_tresp(tleaf = tleaf, tref = tref_vcmax, vcmax_ref = vcmax_ref, func = func_vcmax_tresp)
     vpmax = calc_vpmax_tresp(tleaf = tleaf, tref = tref_vpmax, vpmax_ref = vpmax_ref, func = func_vpmax_tresp)
     ci = ci_calc(ca = ca, ca_frac = ca_frac, func = func_ci)
+    cm <- ci # check that this is how von caemmerer does this
+    ap = vpmax * (cm / (cm + kp))
     
-    ac = vcmax
-    aj = q_yield * abs * par
-    ap = vpmax * ci
+    kp <- calc_kp_temp_pa(tleaf, z)
+    leakage <- leakiness * Al # need to fix
+    cbs <- calc_cbs(cm, leakage) # Eqn. 2.41
+    chi_bs <- cbs / ca
+    obs <- oi
+    ac = vcmax * ((cbs - gammastar) / (kr * (1 + obs/ko) + cbs)) #Vpr in von caemmerer?
+    
+    aj = q_yield * abs * par # need to fix
     
     a = pmin(ac, aj, ap)
     
