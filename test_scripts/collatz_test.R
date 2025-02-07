@@ -180,3 +180,62 @@ collatz_c4_co2_plot_ap = ggplot(data = collatz_c4_co2_curve_highlight,
   ylab(expression('A'[p] * ' (µmol m' ^ '-2' * ' s' ^ '-1' *')')) +
   xlab(expression('Atm. CO'[2] * ' (µmol mol' ^ '-1' * ')'))
 
+### parameter sensitivity test
+collatz_c4_light_curve1 = calc_c4_photosynthesis(par = seq(10, 2000, 10), ca = 400, func = 'collatz',
+                                                 vcmax_ref = rnorm(1, 39, 18.5), vpmax_ref = rnorm(1, 0.78, 0.39),
+                                                 q_yield = rnorm(1, 0.066, 0.033))
+collatz_c4_light_curve2 = calc_c4_photosynthesis(par = seq(10, 2000, 10), ca = 400, func = 'collatz',
+                                                 vcmax_ref = rnorm(1, 39, 18.5), vpmax_ref = rnorm(1, 0.78, 0.39),
+                                                 q_yield = rnorm(1, 0.066, 0.033))
+collatz_c4_light_curve3 = calc_c4_photosynthesis(par = seq(10, 2000, 10), ca = 400, func = 'collatz',
+                                                 vcmax_ref = rnorm(1, 39, 18.5), vpmax_ref = rnorm(1, 0.78, 0.39),
+                                                 q_yield = rnorm(1, 0.066, 0.033))
+collatz_c4_light_curve4 = calc_c4_photosynthesis(par = seq(10, 2000, 10), ca = 400, func = 'collatz',
+                                                 vcmax_ref = rnorm(1, 39, 18.5), vpmax_ref = rnorm(1, 0.78, 0.39),
+                                                 q_yield = rnorm(1, 0.066, 0.033))
+collatz_c4_light_curve5 = calc_c4_photosynthesis(par = seq(10, 2000, 10), ca = 400, func = 'collatz',
+                                                 vcmax_ref = rnorm(1, 39, 18.5), vpmax_ref = rnorm(1, 0.78, 0.39),
+                                                 q_yield = rnorm(1, 0.066, 0.033))
+collatz_c4_light_curve6 = calc_c4_photosynthesis(par = seq(10, 2000, 10), ca = 400, func = 'collatz',
+                                                 vcmax_ref = rnorm(1, 39, 18.5), vpmax_ref = rnorm(1, 0.78, 0.39),
+                                                 q_yield = rnorm(1, 0.066, 0.033))
+collatz_c4_light_curve7 = calc_c4_photosynthesis(par = seq(10, 2000, 10), ca = 400, func = 'collatz',
+                                                 vcmax_ref = rnorm(1, 39, 18.5), vpmax_ref = rnorm(1, 0.78, 0.39),
+                                                 q_yield = rnorm(1, 0.066, 0.033))
+collatz_c4_light_curve8 = calc_c4_photosynthesis(par = seq(10, 2000, 10), ca = 400, func = 'collatz',
+                                                 vcmax_ref = rnorm(1, 39, 18.5), vpmax_ref = rnorm(1, 0.78, 0.39),
+                                                 q_yield = rnorm(1, 0.066, 0.033))
+collatz_c4_light_curve9 = calc_c4_photosynthesis(par = seq(10, 2000, 10), ca = 400, func = 'collatz',
+                                                 vcmax_ref = rnorm(1, 39, 18.5), vpmax_ref = rnorm(1, 0.78, 0.39),
+                                                 q_yield = rnorm(1, 0.066, 0.033))
+collatz_c4_light_curve10 = calc_c4_photosynthesis(par = seq(10, 2000, 10), ca = 400, func = 'collatz',
+                                                 vcmax_ref = rnorm(1, 39, 18.5), vpmax_ref = rnorm(1, 0.78, 0.39),
+                                                 q_yield = rnorm(1, 0.066, 0.033))
+
+### sensitivity plot 
+collatz_c4_light_sensitivity_plot = ggplot(data = collatz_c4_light_curve1, 
+                                      aes(x = par, y = a)) +
+  theme(legend.position = NULL, 
+        axis.title.y=element_text(size=rel(2), colour = 'black'), # change y axis title properties
+        axis.title.x=element_text(size=rel(2), colour = 'black'), # change x axis title properties
+        axis.text.x=element_text(size=rel(2), colour = 'black'), # change x axis text properties
+        axis.text.y=element_text(size=rel(2), colour = 'black'), # change y axis text properties
+        panel.background = element_rect(fill = 'white', colour = 'black'), # change background panel colors
+        panel.grid.major = element_line(colour = "grey") # change backgrond color
+  ) +
+  geom_line(size = 2, color = 'black', alpha = 0.7) +
+  geom_line(size = 2, color = 'orange', alpha = 0.7, data = collatz_c4_light_curve2) +
+  geom_line(size = 2, color = 'blue', alpha = 0.7, data = collatz_c4_light_curve3) +
+  geom_line(size = 2, color = 'purple', alpha = 0.7, data = collatz_c4_light_curve4) +
+  geom_line(size = 2, color = 'green', alpha = 0.7, data = collatz_c4_light_curve5) +
+  geom_line(size = 2, color = 'darkgreen', alpha = 0.7, data = collatz_c4_light_curve6) +
+  geom_line(size = 2, color = 'red', alpha = 0.7, data = collatz_c4_light_curve7) +
+  geom_line(size = 2, color = 'browb', alpha = 0.7, data = collatz_c4_light_curve8) +
+  geom_line(size = 2, color = 'pink', alpha = 0.7, data = collatz_c4_light_curve9) +
+  geom_line(size = 2, color = 'gold', alpha = 0.7, data = collatz_c4_light_curve10) +
+  ylim(c(0, 60)) +
+  xlim(0, 1200) +
+  ylab(expression('Photosynthesis (µmol m' ^ '-2' * ' s' ^ '-1' *')')) +
+  xlab(expression('PAR (µmol m' ^ '-2' * ' s' ^ '-1' *')'))
+
+

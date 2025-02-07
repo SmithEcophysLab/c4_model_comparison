@@ -39,7 +39,12 @@ calc_c4_photosynthesis = function(func = 'collatz',
                                   z = 0,
                                   ca_frac = 0.8, func_ci = 'ca_frac',
                                   tref_vcmax = 25, vcmax_ref = 39, func_vcmax_tresp = 'collatz',
-                                  tref_vpmax = 25, vpmax_ref = 0.78, func_vpmax_tresp = 'collatz'){
+                                  tref_vpmax = 25, vpmax_ref = 0.78, func_vpmax_tresp = 'collatz',
+                                  leakiness = 0.01,
+                                  oao = 209460){
+  
+  oa <- oao * 1e-6 * patm
+  patm <- calc_patm(z)
   
   if(func == 'collatz'){
     
@@ -67,13 +72,14 @@ calc_c4_photosynthesis = function(func = 'collatz',
     vpmax = calc_vpmax_tresp(tleaf = tleaf, tref = tref_vpmax, vpmax_ref = vpmax_ref, func = func_vpmax_tresp)
     ci = ci_calc(ca = ca, ca_frac = ca_frac, func = func_ci)
     cm <- ci # check that this is how von caemmerer does this
+    kp <- calc_kp_temp_pa(tleaf, z)
     ap = vpmax * (cm / (cm + kp))
     
-    kp <- calc_kp_temp_pa(tleaf, z)
-    leakage <- leakiness * Al # need to fix
+    
+    leakage <- leakiness * ap
     cbs <- calc_cbs(cm, leakage) # Eqn. 2.41
     chi_bs <- cbs / ca
-    obs <- oi
+    obs <- oa
     ac = vcmax * ((cbs - gammastar) / (kr * (1 + obs/ko) + cbs)) #Vpr in von caemmerer?
     
     aj = q_yield * abs * par # need to fix
