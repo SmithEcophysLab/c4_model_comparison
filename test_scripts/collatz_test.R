@@ -234,7 +234,7 @@ collatz_c4_light_sensitivity_plot = ggplot(data = collatz_c4_light_curve1,
   geom_line(size = 2, color = 'pink', alpha = 0.7, data = collatz_c4_light_curve9) +
   geom_line(size = 2, color = 'gold', alpha = 0.7, data = collatz_c4_light_curve10) +
   ylim(c(0, 60)) +
-  xlim(0, 1200) +
+  xlim(0, 1500) +
   ylab(expression('Photosynthesis (µmol m' ^ '-2' * ' s' ^ '-1' *')')) +
   xlab(expression('PAR (µmol m' ^ '-2' * ' s' ^ '-1' *')'))
 
