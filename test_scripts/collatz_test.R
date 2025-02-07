@@ -238,4 +238,6 @@ collatz_c4_light_sensitivity_plot = ggplot(data = collatz_c4_light_curve1,
   ylab(expression('Photosynthesis (µmol m' ^ '-2' * ' s' ^ '-1' *')')) +
   xlab(expression('PAR (µmol m' ^ '-2' * ' s' ^ '-1' *')'))
 
-
+jpeg('figures/collatz_sensitivity.jpeg', width = 8, height = 8, units = 'in', res = 600)
+plot(collatz_c4_light_sensitivity_plot)
+dev.off()
