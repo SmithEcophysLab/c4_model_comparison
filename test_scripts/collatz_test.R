@@ -221,7 +221,7 @@ collatz_c4_light_sensitivity_plot = ggplot(data = collatz_c4_light_curve1,
         axis.text.x=element_text(size=rel(2), colour = 'black'), # change x axis text properties
         axis.text.y=element_text(size=rel(2), colour = 'black'), # change y axis text properties
         panel.background = element_rect(fill = 'white', colour = 'black'), # change background panel colors
-        panel.grid.major = element_line(colour = "grey") # change backgrond color
+        panel.grid.major = element_blank() # change backgrond color
   ) +
   geom_line(size = 2, color = 'black', alpha = 0.7) +
   geom_line(size = 2, color = 'orange', alpha = 0.7, data = collatz_c4_light_curve2) +
@@ -230,7 +230,7 @@ collatz_c4_light_sensitivity_plot = ggplot(data = collatz_c4_light_curve1,
   geom_line(size = 2, color = 'green', alpha = 0.7, data = collatz_c4_light_curve5) +
   geom_line(size = 2, color = 'darkgreen', alpha = 0.7, data = collatz_c4_light_curve6) +
   geom_line(size = 2, color = 'red', alpha = 0.7, data = collatz_c4_light_curve7) +
-  geom_line(size = 2, color = 'browb', alpha = 0.7, data = collatz_c4_light_curve8) +
+  geom_line(size = 2, color = 'brown', alpha = 0.7, data = collatz_c4_light_curve8) +
   geom_line(size = 2, color = 'pink', alpha = 0.7, data = collatz_c4_light_curve9) +
   geom_line(size = 2, color = 'gold', alpha = 0.7, data = collatz_c4_light_curve10) +
   ylim(c(0, 60)) +
@@ -238,6 +238,7 @@ collatz_c4_light_sensitivity_plot = ggplot(data = collatz_c4_light_curve1,
   ylab(expression('Photosynthesis (µmol m' ^ '-2' * ' s' ^ '-1' *')')) +
   xlab(expression('PAR (µmol m' ^ '-2' * ' s' ^ '-1' *')'))
 
-jpeg('figures/collatz_sensitivity.jpeg', width = 8, height = 8, units = 'in', res = 600)
+jpeg('figures/collatz_sensitivity.jpeg', width = 5, height = 5, units = 'in', res = 600)
 plot(collatz_c4_light_sensitivity_plot)
 dev.off()
+

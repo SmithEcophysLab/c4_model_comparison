@@ -43,8 +43,8 @@ calc_c4_photosynthesis = function(func = 'collatz',
                                   leakiness = 0.01,
                                   oao = 209460){
   
-  oa <- oao * 1e-6 * patm
-  patm <- calc_patm(z)
+  patm = calc_patm(z)
+  oa = oao * 1e-6 * patm
   
   if(func == 'collatz'){
     
